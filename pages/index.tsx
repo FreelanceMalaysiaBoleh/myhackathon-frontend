@@ -1,4 +1,3 @@
-import Header from "@/component/main/Header";
 import MainLayout from "@/component/main/MainLayout";
 import Image from "next/image";
 import map from "../public/images/malaysia-map.png"
