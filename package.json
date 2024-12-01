@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react-datepicker": "^7.0.0",
+    "axios": "^1.7.8",
+    "mapbox-gl": "^3.8.0",
     "next": "14.2.18",
     "react": "^18",
+    "react-datepicker": "^7.5.0",
     "react-dom": "^18",
+    "react-map-gl": "^7.1.7",
+    "react-query": "^3.39.3",
     "recharts": "^2.13.3",
     "sharp": "^0.33.5"
   },
