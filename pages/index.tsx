@@ -1,18 +1,38 @@
 import MainLayout from "@/component/main/MainLayout";
-import Image from "next/image";
-import map from "../public/images/malaysia-map.png"
 import CaseTrendChart from "@/component/dashboard/CaseTrendChart";
 import TypeOfScamBreakdowChart from "@/component/dashboard/TypeOfScamBreakdownChart";
 import RiskAssessment from "@/component/dashboard/RiskAssessment";
+import MapComponent from "@/component/dashboard/MapComponent";
+import DatePickerComponent from "@/component/main/DatePicker";
+import { useState } from "react";
+import SmallButton from "@/component/main/SmallButton";
+import Divider from "@/component/main/Divider";
 
 export default function Home() {
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
+
+
   return (
     <>
       <MainLayout>
+        <div style={{ display: "flex", flexDirection: "row", width: "100%", alignItems: "center" }}>
+          <p style={{ fontWeight: "bold", fontSize: "24px", marginRight: 20 }}>Filter:</p>
+          <DatePickerComponent selectedDate={startDate} onDateChange={setStartDate} />
+          <div style={{ border: "1px solid black", width: "10px", marginLeft: 10, marginRight: 10 }}></div>
+          <DatePickerComponent selectedDate={endDate} onDateChange={setEndDate} />
+
+          <div style={{ marginLeft: "auto" }}>
+            <SmallButton text="AI Report Generator" onClick={() => { }} />
+          </div>
+        </div>
+
+        <Divider />
+        
         <h1>2024 Scam Dashboard: Insights and Analysis</h1>
 
         <div style={{ display: "flex", flexDirection: "row", width: "100%", marginTop: "30px" }}>
-          <Image src={map.src} width={1011} height={482} alt="malaysian map" />
+          <MapComponent />
           <div style={{ width: "auto", backgroundColor: "#0e1626", marginLeft: "5px", flex: 1, display: "flex", flexDirection: "column", padding: 40, alignItems: "center" }}>
             <h2 style={{ color: "white", fontSize: "13px" }}>Malaysian Scam Cases Heatmap 2024</h2>
             <div style={{ border: "1px solid white", width: "80%", marginTop: 20, marginBottom: 20 }}></div>
@@ -43,7 +63,7 @@ export default function Home() {
         </div>
 
         <div style={{ width: "100%", marginTop: 30 }}>
-        <h1 style={{ marginBottom: 20, fontSize: "24px" }}>Risk Assessment Statistics in 2024</h1>
+          <h1 style={{ marginBottom: 20, fontSize: "24px" }}>Risk Assessment Statistics in 2024</h1>
           <RiskAssessment />
         </div>
       </MainLayout>
@@ -72,7 +92,7 @@ const StateRow = ({ name, number }: { name: string, number: string }) => {
   )
 }
 
-const StatsBox = ({ text, number, color }: { text: string, number: number, color: string }) => {
+export const StatsBox = ({ text, number, color }: { text: string, number: number, color: string }) => {
   return (
     <div style={{
       border: "0.5px solid gray",
