@@ -28,12 +28,12 @@ export default function Home() {
         </div>
 
         <Divider />
-        
+
         <h1>2024 Scam Dashboard: Insights and Analysis</h1>
 
         <div style={{ display: "flex", flexDirection: "row", width: "100%", marginTop: "30px" }}>
           <MapComponent />
-          <div style={{ width: "auto", backgroundColor: "#0e1626", marginLeft: "5px", flex: 1, display: "flex", flexDirection: "column", padding: 40, alignItems: "center" }}>
+          <div style={{ minWidth: "300px", width: "auto", textAlign: "center", backgroundColor: "#0e1626", marginLeft: "5px", flex: 1, display: "flex", flexDirection: "column", padding: 40, alignItems: "center" }}>
             <h2 style={{ color: "white", fontSize: "13px" }}>Malaysian Scam Cases Heatmap 2024</h2>
             <div style={{ border: "1px solid white", width: "80%", marginTop: 20, marginBottom: 20 }}></div>
 
@@ -75,9 +75,9 @@ export default function Home() {
 const StateRow = ({ name, number }: { name: string, number: string }) => {
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "row", width: "50%" }}>
-        <p style={{ fontSize: "13px", color: "white" }}>{name}</p>
-        <p style={{ fontSize: "13px", color: "white", marginLeft: "auto" }}>{number}</p>
+      <div style={{ display: "flex", justifyContent: "space-between", width: "75%" }}>
+        <p style={{ fontSize: "13px", color: "white", margin: 0 }}>{name}</p>
+        <p style={{ fontSize: "13px", color: "white", margin: 0 }}>{number}</p>
       </div>
       <div
         style={{
@@ -103,7 +103,8 @@ export const StatsBox = ({ text, number, color }: { text: string, number: number
       flexDirection: "column",
       flex: 1,
       borderRadius: "5px",
-      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)"
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+      textAlign: "center"
     }}>
       <p style={{ fontFamily: "Roboto", fontSize: "48px", color: color }}>{number.toLocaleString()}</p>
       <p style={{ fontFamily: "Roboto", fontSize: "24px" }}>{text}</p>

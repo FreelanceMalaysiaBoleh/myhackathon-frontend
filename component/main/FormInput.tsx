@@ -13,7 +13,7 @@ const TextInput: React.FC<InputProps> = ({ label, placeholder, required, formkey
                 style={{
                     display: "block",
                     fontWeight: "bold",
-                    marginBottom: "5px",
+                    marginBottom: "10px",
                     fontSize: "24px"
                 }}
             >
