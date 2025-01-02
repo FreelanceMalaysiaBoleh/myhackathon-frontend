@@ -4,9 +4,8 @@ import ReportHead from "./ReportHead";
 import { useRouter } from "next/router";
 import { DataProps } from "@/pages/report";
 
-const PendingCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoading: boolean }) => {
+const PendingCaseTable = ({ data, isLoading }: { data: Array<DataProps> | undefined, isLoading: boolean }) => {
     const router = useRouter();
-
     return (
         <>
             <ReportHead text="Pending Case" />
@@ -40,7 +39,7 @@ const PendingCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoadi
                     </thead>
                     <tbody style={{ backgroundColor: "white" }}>
                         {/* Loop through the data and display each row */}
-                        {data && data?.map((row, rowIndex) => (
+                        {data && !isLoading && data?.map((row, rowIndex) => (
                             <tr key={rowIndex}>
                                 <td
                                     style={{
@@ -48,7 +47,7 @@ const PendingCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoadi
                                         textAlign: "left",
                                         border: "1px solid #ddd",
                                         borderRadius: "0 0 0 10px",
-                                        wordWrap: "break-word",  // Ensure text wraps within the cell
+                                        wordWrap: "break-word",
                                     }}
                                 >
                                     <Link style={{ color: "#073DFF", textDecoration: "underline" }} href={"/"}>{row.CaseID}</Link>
@@ -58,7 +57,7 @@ const PendingCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoadi
                                         padding: "15px",
                                         textAlign: "left",
                                         border: "1px solid #ddd",
-                                        wordWrap: "break-word",  // Ensure text wraps within the cell
+                                        wordWrap: "break-word", 
                                     }}
                                 >
                                     {row.TypeOfScam}
@@ -114,7 +113,7 @@ const PendingCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoadi
                                     }}
                                 >
                                     <SmallButton text="RESPOND" onClick={() => {
-                                        router.push("/report/1/view")
+                                        router.push(`/report/${row.CaseID}/view`)
                                     }} />
                                 </td>
                             </tr>
