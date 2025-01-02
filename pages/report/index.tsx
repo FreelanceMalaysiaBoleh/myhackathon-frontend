@@ -3,7 +3,8 @@ import MainLayout from "@/component/main/MainLayout";
 import { StatsBox } from "..";
 import PendingCaseTable from "@/component/report/PendingCaseTable";
 import ResolveCaseTable from "@/component/report/ResolveCaseTable";
-import { useGetAllCase } from "@/hooks/case/useGetAllCase";
+import { useGetCaseByStatus } from "@/hooks/case/useGetCaseByStatus";
+import { useDashboardStats } from "@/hooks/dashboard/useDashboardStats";
 
 // TODO: setup an actual types constant file
 export interface DataProps {
@@ -18,9 +19,10 @@ export interface DataProps {
 
 const ReportManagement = () => {
 
-    const { data, isLoading } = useGetAllCase();
+    const { data: pendingCases, isLoading: isLoadingPending } = useGetCaseByStatus("Pending");
+    const { data: resolvedCases, isLoading: isLoadingResolved } = useGetCaseByStatus("Resolved");
+    const { data, isLoading } = useDashboardStats();
 
-    console.log("data", data);
     return (
         <MainLayout>
             <div style={{ width: "100%", paddingLeft: 10 }}>
@@ -29,14 +31,22 @@ const ReportManagement = () => {
             <Divider />
 
             <div style={{ width: "100%", display: "flex", gap: "50px", marginTop: "30px" }}>
-                <StatsBox text="TOTAL SCAM REPORTS" number={1234} color="#2563EB" />
-                <StatsBox text="RESOLVED CASES" number={789} color="#16A34A" />
-                <StatsBox text="PENDING CASES" number={445} color="#DC2626" />
+                {
+                    data && !isLoading
+                        ?
+                        <>
+                            <StatsBox text="TOTAL SCAM REPORTS" number={data.total_cases} color="#2563EB" />
+                            <StatsBox text="RESOLVED CASES" number={data.resolved_cases} color="#16A34A" />
+                            <StatsBox text="PENDING CASES" number={data.pending_cases} color="#DC2626" />
+                        </>
+                        :
+                        <></>
+                }   
             </div>
 
-            <PendingCaseTable data={data} isLoading={isLoading} />
-            <div style={{marginTop: 30}}></div>
-            <ResolveCaseTable data={data} isLoading={isLoading}/>
+            <PendingCaseTable data={pendingCases} isLoading={isLoadingPending} />
+            <div style={{ marginTop: 30 }}></div>
+            <ResolveCaseTable data={resolvedCases} isLoading={isLoadingResolved} />
 
         </MainLayout>
     )
