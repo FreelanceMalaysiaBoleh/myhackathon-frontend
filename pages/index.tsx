@@ -7,8 +7,11 @@ import DatePickerComponent from "@/component/main/DatePicker";
 import { useState } from "react";
 import SmallButton from "@/component/main/SmallButton";
 import Divider from "@/component/main/Divider";
+import { useDashboardStats } from "@/hooks/dashboard/useDashboardStats";
 
 export default function Home() {
+
+  const { data, isLoading } = useDashboardStats();
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
@@ -47,9 +50,18 @@ export default function Home() {
         </div>
 
         <div style={{ width: "100%", display: "flex", gap: "50px", marginTop: "30px" }}>
-          <StatsBox text="TOTAL SCAM REPORTS" number={1234} color="#2563EB" />
-          <StatsBox text="RESOLVED CASES" number={789} color="#16A34A" />
-          <StatsBox text="PENDING CASES" number={445} color="#DC2626" />
+          {
+            data && !isLoading
+              ?
+              <>
+                <StatsBox text="TOTAL SCAM REPORTS" number={data.total_cases} color="#2563EB" />
+                <StatsBox text="RESOLVED CASES" number={data.resolved_cases} color="#16A34A" />
+                <StatsBox text="PENDING CASES" number={data.pending_cases} color="#DC2626" />
+              </>
+              :
+              <></>
+          }
+
         </div>
 
         <div style={{ width: "100%", padding: 20, border: "1px solid gray", marginTop: 30, borderRadius: "5px  " }}>

@@ -4,7 +4,7 @@ import ReportHead from "./ReportHead";
 import { useRouter } from "next/router";
 import { DataProps } from "@/pages/report";
 
-const ResolveCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoading: boolean }) => {
+const ResolveCaseTable = ({ data, isLoading }: { data: Array<DataProps> | undefined, isLoading: boolean }) => {
     const router = useRouter();
 
     return (
@@ -40,7 +40,7 @@ const ResolveCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoadi
                     </thead>
                     <tbody style={{ backgroundColor: "white" }}>
                         {/* Loop through the data and display each row */}
-                        {data && data?.map((row, rowIndex) => (
+                        {data && !isLoading && data?.map((row, rowIndex) => (
                             <tr key={rowIndex}>
                                 <td
                                     style={{
@@ -113,7 +113,7 @@ const ResolveCaseTable = ({ data, isLoading }: { data: Array<DataProps>, isLoadi
                                         wordWrap: "break-word",  // Ensure text wraps within the cell
                                     }}
                                 >
-                                    <Link style={{ color: "#073DFF", textDecoration: "underline" }} href={"/report/1/view"}>Edit</Link>
+                                    <Link style={{ color: "#073DFF", textDecoration: "underline" }} href={`/report/${row.CaseID}/view`}>Edit</Link>
                                 </td>
                             </tr>
                         ))}

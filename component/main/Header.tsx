@@ -68,7 +68,9 @@ const Header = () => {
                 <HeaderButtons
                     text="ACTIVITY LOG"
                     selected={router.asPath.includes("/activity")}
-                    onClick={() => { router.push("/activity") }}
+                    onClick={() => {
+                        window.location.href = "http://18.141.243.3:5001/";
+                     }}
                 />
             </div>
         </div >
